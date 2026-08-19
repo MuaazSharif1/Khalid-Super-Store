@@ -17,7 +17,10 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+const uploadsStaticDir = process.env.UPLOADS_DIR
+  ? path.resolve(process.env.UPLOADS_DIR)
+  : path.join(__dirname, "uploads");
+app.use("/uploads", express.static(uploadsStaticDir));
 
 app.get("/api/health", (req, res) => res.json({ ok: true, store: "Khalid Super Store" }));
 

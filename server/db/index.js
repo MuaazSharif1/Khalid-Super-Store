@@ -1,7 +1,15 @@
+const fs = require("fs");
 const path = require("path");
 const Database = require("better-sqlite3");
 
-const dbPath = path.join(__dirname, "store.sqlite");
+const dbPath = process.env.DB_PATH
+  ? path.resolve(process.env.DB_PATH)
+  : path.join(__dirname, "store.sqlite");
+
+// Make sure the folder for the db file exists (needed for mounted volumes)
+const dbDir = path.dirname(dbPath);
+if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
+
 const db = new Database(dbPath);
 
 db.pragma("journal_mode = WAL");
