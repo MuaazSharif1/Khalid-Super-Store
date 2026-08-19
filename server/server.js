@@ -15,7 +15,31 @@ const settingsRoutes = require("./routes/settings");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
+// Support one or multiple comma-separated origins, trim spaces and any
+// trailing slash so small formatting differences don't silently break CORS.
+const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173")
+  .split(",")
+  .map((o) => o.trim().replace(/\/$/, ""))
+  .filter(Boolean);
+
+console.log("Allowed CORS origins:", allowedOrigins);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow tools like curl/health checks with no Origin header at all.
+      if (!origin) return callback(null, true);
+      const clean = origin.replace(/\/$/, "");
+      if (allowedOrigins.includes(clean)) {
+        callback(null, true);
+      } else {
+        console.warn(`Blocked CORS request from origin: "${origin}". Allowed: ${allowedOrigins.join(", ")}`);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 const uploadsStaticDir = process.env.UPLOADS_DIR
   ? path.resolve(process.env.UPLOADS_DIR)
@@ -37,6 +61,9 @@ app.use((req, res) => res.status(404).json({ error: "Not found" }));
 
 app.use((err, req, res, next) => {
   console.error(err);
+  if (err.message === "Not allowed by CORS") {
+    return res.status(403).json({ error: "Not allowed by CORS" });
+  }
   res.status(500).json({ error: "Something went wrong on the server" });
 });
 
