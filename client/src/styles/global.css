@@ -597,6 +597,19 @@ img {
   margin-bottom: 8px;
 }
 
+.promo-banner {
+  margin: 32px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.promo-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .category-tile {
   background: var(--cream);
   border: 1px solid var(--line);
@@ -2798,6 +2811,14 @@ table.data-table tr:hover td {
   font-weight: 700;
 }
 
+.receipt-logo {
+  max-width: 55%;
+  max-height: 60px;
+  object-fit: contain;
+  margin: 0 auto 6px;
+  display: block;
+}
+
 .receipt-title {
   font-size: 15px;
   margin-bottom: 2px;
@@ -4282,5 +4303,12 @@ table.data-table tr:hover td {
 
   .stat-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .promo-banner {
+    margin: 20px 0;
+    border-radius: 10px;
   }
 }
