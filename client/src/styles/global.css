@@ -529,7 +529,7 @@ img {
 
 /* MOBILE */
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .hero-container {
     grid-template-columns: 1fr;
     padding-top: 45px;
@@ -1219,7 +1219,7 @@ img {
   padding: 18px 20px 6px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .chart-grid {
     grid-template-columns: 1fr;
   }
@@ -1408,7 +1408,7 @@ table.data-table tr:last-child td {
   justify-content: space-between;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .hero .container {
     grid-template-columns: 1fr;
   }
@@ -2387,7 +2387,7 @@ table.data-table tr:hover td {
 
 /* Tablet */
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .hero-new-container {
     grid-template-columns: 1fr;
     padding-top: 50px;
@@ -3029,8 +3029,8 @@ table.data-table tr:hover td {
   }
 }
 
-/* ---------- Tablet / large phone (≤900px) ---------- */
-@media (max-width: 900px) {
+/* ---------- Tablet portrait / large phone (≤820px) ---------- */
+@media (max-width: 820px) {
   /* Row 1: brand only. Row 2: search + login/cart together in one flex line. */
   .header-row {
     flex-wrap: wrap;
@@ -3540,7 +3540,7 @@ table.data-table tr:hover td {
 /* iPad landscape / larger tablets (901–1024): keep the two-column
    cart and admin sidebar layouts that desktop uses — only touch
    spacing needs adjusting, not the structure. */
-@media (min-width: 901px) and (max-width: 1024px) {
+@media (min-width: 821px) and (max-width: 1024px) {
   .hero-products,
   .hero-new-products {
     display: grid;
@@ -3566,11 +3566,11 @@ table.data-table tr:hover td {
   }
 }
 
-/* iPad portrait / mid tablets (641–900): admin nav and cart layout
-   already stack via the 900px rules above (better for touch use in
+/* iPad portrait / mid tablets (641–820): admin nav and cart layout
+   already stack via the 820px rules above (better for touch use in
    portrait), but give them tablet-appropriate spacing instead of
    the tighter phone spacing. */
-@media (min-width: 641px) and (max-width: 900px) {
+@media (min-width: 641px) and (max-width: 820px) {
   .admin-nav-links a {
     padding: 10px 14px;
     font-size: 13px;
