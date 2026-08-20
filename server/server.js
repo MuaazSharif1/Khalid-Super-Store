@@ -69,6 +69,6 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Khalid Super Store API running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Khalid Super Store API running on http://localhost:${PORT}`);
 });
