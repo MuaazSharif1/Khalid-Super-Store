@@ -340,6 +340,20 @@ router.put("/orders/:id/status", async (req, res) => {
   if (!existing) return res.status(404).json({ error: "Order not found" });
 
   db.prepare("UPDATE orders SET status = ? WHERE id = ?").run(status, req.params.id);
+
+  // Cash-on-delivery: the customer pays the rider when the order is
+  // handed over, so marking the order "completed" is also the moment
+  // payment actually happens — flip payment_status to 'paid' instead of
+  // leaving it stuck on 'unpaid' forever.
+  if (status === "completed" && existing.payment_method === "cod" && existing.payment_status === "unpaid") {
+    db.prepare(`
+      UPDATE orders SET
+        payment_status = 'paid',
+        payment_verified_at = datetime('now')
+      WHERE id = ?
+    `).run(req.params.id);
+  }
+
   recordStatusChange(req.params.id, status, note || null);
 
   const updated = db.prepare("SELECT * FROM orders WHERE id = ?").get(req.params.id);
