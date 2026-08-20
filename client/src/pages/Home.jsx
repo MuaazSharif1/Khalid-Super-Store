@@ -145,7 +145,15 @@ export default function Home() {
               to={`/category/${c.slug}`}
               className="category-tile"
             >
-              <span className="icon">{c.icon}</span>
+              {c.image ? (
+                <img
+                  src={resolveImageUrl(c.image)}
+                  alt=""
+                  style={{ width: 32, height: 32, objectFit: "contain", marginBottom: 6 }}
+                />
+              ) : (
+                <span className="icon">{c.icon}</span>
+              )}
               <span className="name">{c.name}</span>
               <div className="count">
                 {c.product_count} items
@@ -154,6 +162,9 @@ export default function Home() {
           ))}
         </div>
 
+        <div className="promo-banner">
+          <img src="/atta-banner.jpg" alt="Khalid Chakki Atta — 100% Whole Wheat Flour" />
+        </div>
 
         <div className="section-title">
 
