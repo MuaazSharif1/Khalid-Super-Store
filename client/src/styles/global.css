@@ -26,6 +26,16 @@ body,
   height: 100%;
 }
 
+/* Sticky footer: the storefront's top-level wrapper (Header + page
+   content + Footer) becomes a full-height flex column so the footer
+   is pushed to the bottom of the viewport on short pages instead of
+   leaving a gap of white space below it. */
+#root > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 body {
   margin: 0;
   background: var(--ivory);
@@ -1356,7 +1366,13 @@ table.data-table tr:last-child td {
   background: var(--ink);
   color: #b8b6b4;
   margin-top: 60px;
+  /* margin-top: auto pairs with the #root > div flex column above to
+     stick this to the bottom of short pages; extra bottom padding
+     respects the iPhone home-indicator / gesture-bar safe area. */
+  margin-top: auto;
   padding: 40px 0 24px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  width: 100%;
 }
 
 .footer-grid {
@@ -3015,48 +3031,62 @@ table.data-table tr:hover td {
 
 /* ---------- Tablet / large phone (≤900px) ---------- */
 @media (max-width: 900px) {
-  /* Header stacks the actions row below the brand + search */
+  /* Row 1: brand only. Row 2: search + login/cart together in one flex line. */
   .header-row {
     flex-wrap: wrap;
     height: auto;
     min-height: 0;
-    padding: 10px 0;
-    gap: 10px 16px;
+    padding: 8px 0;
+    gap: 8px 12px;
+    align-items: center;
+  }
+
+  .brand {
+    order: 1;
+    flex: 1 1 100%;
   }
 
   .brand-mark {
-    width: 54px;
-    height: 54px;
+    width: 40px;
+    height: 40px;
   }
 
   .brand-mark img {
-    width: 54px;
-    height: 54px;
+    width: 40px;
+    height: 40px;
   }
 
   .brand-name {
-    font-size: 17px;
+    font-size: 15px;
+  }
+
+  .brand-tag {
+    font-size: 10px;
   }
 
   .search-form {
-    order: 3;
-    max-width: 100%;
-    width: 100%;
-    flex-basis: 100%;
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
   }
 
   .header-actions {
-    gap: 12px;
+    order: 3;
+    flex: 0 0 auto;
+    gap: 10px;
     margin-left: 0;
   }
 
   .header-actions a,
   .header-actions button.linklike {
     font-size: 12px;
+    white-space: nowrap;
   }
 
   .cart-pill {
-    padding: 8px 14px;
+    padding: 7px 12px;
+    font-size: 12px;
   }
 
   /* Category strip becomes a swipeable row */
@@ -3201,16 +3231,23 @@ table.data-table tr:hover td {
   }
 
   .search-form input {
-    padding: 9px 14px;
-    font-size: 13px;
+    padding: 8px 10px;
+    font-size: 12.5px;
   }
 
   .search-form button {
-    padding: 0 16px;
+    padding: 0 12px;
+    font-size: 12.5px;
   }
 
   .header-actions {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+  }
+
+  .header-actions a,
+  .header-actions button.linklike {
+    font-size: 11px;
+    gap: 3px;
   }
 
   .cart-pill {
@@ -3280,33 +3317,56 @@ table.data-table tr:hover td {
     font-size: 26px;
   }
 
-  /* Two products per row keeps cards legible on phones */
+  /* Two products per row, compact card size */
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
 
   .product-card {
-    padding: 10px;
+    padding: 8px;
+    gap: 5px;
+    border-radius: 6px;
   }
 
   .product-thumb {
-    height: 130px;
-    font-size: 32px;
+    height: 100px;
+    font-size: 26px;
+    border-radius: 6px;
   }
 
   .product-name {
-    font-size: 13px;
-    min-height: 34px;
+    font-size: 12px;
+    min-height: 30px;
+    line-height: 1.25;
+  }
+
+  .product-unit {
+    font-size: 10.5px;
+  }
+
+  .price-tag {
+    gap: 5px;
   }
 
   .price-tag .now {
-    font-size: 15px;
+    font-size: 13.5px;
+  }
+
+  .price-tag .was {
+    font-size: 10.5px;
   }
 
   .add-btn {
-    padding: 8px 10px;
-    font-size: 12px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .stock-flag {
+    font-size: 8.5px;
+    padding: 2px 6px;
+    top: 6px;
+    right: 6px;
   }
 
   /* Cart line drops to a two-row layout so it never overflows */
@@ -3334,6 +3394,18 @@ table.data-table tr:hover td {
 
   .fulfillment-picker {
     flex-direction: column;
+  }
+
+  /* Login / Register / any narrow auth-style page: keep the card
+     comfortably clear of the screen edges instead of touching them. */
+  .container.page {
+    padding: 0 18px;
+  }
+
+  .page .card,
+  .card {
+    padding: 20px 18px;
+    border-radius: 10px;
   }
 
   /* Wide tables scroll horizontally instead of squeezing */
@@ -3415,7 +3487,8 @@ table.data-table tr:hover td {
   }
 
   .product-thumb {
-    height: 115px;
+    height: 90px;
+    font-size: 22px;
   }
 
   .brand-tag {
