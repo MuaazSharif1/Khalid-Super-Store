@@ -2,6 +2,9 @@
   "name": "khalid-super-store-server",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+  "node": "20.x"
+},
   "type": "commonjs",
   "scripts": {
     "seed": "node db/seed.js",
