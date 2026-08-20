@@ -1048,74 +1048,119 @@ img {
   color: var(--ink-soft);
 }
 
-/* ---------- Admin ---------- */
+/* =========================================================
+   ADMIN — LAPTOP / DESKTOP
+   Desktop/laptop admin layout
+   ========================================================= */
 
 .admin-shell {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 230px minmax(0, 1fr);
+  width: 100%;
   min-height: calc(100vh - 78px);
+  align-items: stretch;
 }
+
+/* ---------- LEFT ADMIN SIDEBAR ---------- */
 
 .admin-nav {
   background: var(--ink);
   color: #f4f4f2;
+
+  width: 230px;
+  min-width: 230px;
+  min-height: calc(100vh - 78px);
+
   padding: 24px 16px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 78px);
+
+  position: sticky;
+  top: 0;
+  align-self: start;
 }
+
+/* Admin logo / brand */
 
 .admin-nav-brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+
+  width: 100%;
+  margin-bottom: 20px;
   padding: 0 4px;
+
+  box-sizing: border-box;
 }
 
 .admin-nav-brand-mark {
   width: 34px;
   height: 34px;
+
   border-radius: 8px;
+
   background: var(--brass);
   color: var(--ink);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 13px;
+
   flex-shrink: 0;
 }
 
 .admin-nav-brand-name {
   display: block;
+
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 13px;
+
   color: #fff;
   line-height: 1.3;
 }
 
 .admin-nav-brand-sub {
   display: block;
+
   font-size: 10px;
   color: var(--brass);
+
   text-transform: uppercase;
   letter-spacing: 0.06em;
+
   font-weight: 700;
 }
 
+/* ---------- VISIT SITE BUTTON ---------- */
+
 .admin-nav a.admin-visit-site {
   display: block;
+  width: 100%;
+
+  box-sizing: border-box;
+
   text-align: center;
+
   background: var(--brass);
   color: var(--ink);
+
   font-weight: 700;
   font-size: 13px;
+
   padding: 10px 12px;
+
   border-radius: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+
+  white-space: nowrap;
 }
 
 .admin-nav a.admin-visit-site:hover {
@@ -1123,34 +1168,103 @@ img {
   color: var(--ink);
 }
 
+/* ---------- ADMIN NAVIGATION ---------- */
+
 .admin-nav-links {
-  flex: 1;
+  flex: 1 1 auto;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
 }
 
+.admin-nav a {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 40px;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  font-weight: 700;
+  font-size: 13px;
+
+  margin: 0;
+
+  color: #d8d6d5;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.admin-nav a:hover {
+  background: var(--brass);
+  color: var(--ink);
+}
+
+.admin-nav a.active {
+  background: var(--brass);
+  color: var(--ink);
+}
+
+/* ---------- ADMIN SIDEBAR FOOTER ---------- */
+
 .admin-nav-footer {
+  width: 100%;
+
   border-top: 1px solid rgba(244, 244, 242, 0.15);
+
   padding-top: 14px;
-  margin-top: 14px;
+  margin-top: 18px;
+
+  box-sizing: border-box;
 }
 
 .admin-nav-user {
   font-size: 11px;
   color: #b8b6b4;
+
   padding: 0 12px;
   margin-bottom: 10px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .admin-logout-btn {
   display: block;
+
   width: 100%;
+  box-sizing: border-box;
+
   background: transparent;
+
   border: 1.5px solid var(--wine);
+
   color: var(--wine);
+
   font-weight: 700;
   font-size: 13px;
+
   padding: 9px 12px;
+
   border-radius: 8px;
+
   text-align: center;
+
+  cursor: pointer;
 }
 
 .admin-logout-btn:hover {
@@ -1158,95 +1272,123 @@ img {
   color: #fff;
 }
 
-.admin-nav a {
-  display: block;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 13px;
-  margin-bottom: 4px;
-  color: #d8d6d5;
-}
-
-.admin-nav a.active,
-.admin-nav a:hover {
-  background: var(--brass);
-  color: var(--ink);
-}
+/* ---------- MAIN ADMIN AREA ---------- */
 
 .admin-main {
+  min-width: 0;
+  width: 100%;
+
+  box-sizing: border-box;
+
   padding: 28px 32px;
+
   background: var(--ivory);
+
+  overflow-x: hidden;
 }
+
+/* ---------- DASHBOARD STAT CARDS ---------- */
 
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(160px, 1fr));
+
   gap: 14px;
+
   margin-bottom: 28px;
 }
 
 .stat-card {
   background: var(--cream);
+
   border: 1px solid var(--line);
   border-radius: var(--radius);
+
   padding: 16px;
+
   border-top: 3px solid var(--brass);
+
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .stat-card .num {
   font-family: var(--font-display);
+
   font-size: 28px;
   font-weight: 800;
+
   color: var(--wine);
 }
 
 .stat-card .label {
   font-size: 12px;
+
   color: var(--ink-soft);
+
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
+/* ---------- CHARTS ---------- */
+
 .chart-grid {
   display: grid;
+
   grid-template-columns: 1.3fr 1fr;
+
   gap: 18px;
+
   margin-bottom: 8px;
+
+  min-width: 0;
 }
 
 .chart-card {
   padding: 18px 20px 6px;
+
+  min-width: 0;
+  box-sizing: border-box;
 }
 
-@media (max-width: 820px) {
-  .chart-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* ---------- ADMIN TABLE ---------- */
 
 table.data-table {
   width: 100%;
+
   border-collapse: collapse;
+
   background: var(--cream);
+
   border-radius: var(--radius);
+
   overflow: hidden;
 }
 
 table.data-table th,
 table.data-table td {
   text-align: left;
+
   padding: 10px 12px;
+
   border-bottom: 1px solid var(--line);
+
   font-size: 13.5px;
 }
 
 table.data-table th {
   background: var(--ink);
+
   color: #fff;
+
   text-transform: uppercase;
+
   font-size: 11px;
+
   letter-spacing: 0.04em;
+
   font-weight: 700;
 }
 
@@ -1258,13 +1400,21 @@ table.data-table tr:last-child td {
   border-bottom: none;
 }
 
+/* ---------- ACTION ICON BUTTONS ---------- */
+
 .icon-btn {
   background: none;
+
   border: none;
+
   font-weight: 700;
   font-size: 12px;
+
   color: var(--ink);
+
   margin-right: 10px;
+
+  cursor: pointer;
 }
 
 .icon-btn:hover {
@@ -1273,6 +1423,139 @@ table.data-table tr:last-child td {
 
 .icon-btn.danger {
   color: var(--wine);
+}
+
+
+/* =========================================================
+   LAPTOP SIZES
+   ========================================================= */
+
+/* 1025px–1200px laptops */
+@media (min-width: 1025px) and (max-width: 1200px) {
+
+  .admin-shell {
+    grid-template-columns: 215px minmax(0, 1fr);
+  }
+
+  .admin-nav {
+    width: 215px;
+    min-width: 215px;
+
+    padding: 22px 13px;
+  }
+
+  .admin-main {
+    padding: 24px 22px;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
+
+
+/* 1201px–1600px laptops / desktops */
+@media (min-width: 1201px) and (max-width: 1600px) {
+
+  .admin-shell {
+    grid-template-columns: 230px minmax(0, 1fr);
+  }
+
+  .admin-nav {
+    width: 230px;
+    min-width: 230px;
+  }
+
+  .admin-main {
+    padding: 28px 30px;
+  }
+}
+
+
+/* Large desktop */
+@media (min-width: 1601px) {
+
+  .admin-shell {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .admin-nav {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  .admin-main {
+    padding: 32px 40px;
+  }
+}
+
+
+/* =========================================================
+   TABLET / IPAD
+   Keeps tablet responsive behavior separate
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .admin-shell {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+
+  .admin-nav {
+    width: 190px;
+    min-width: 190px;
+
+    padding: 20px 12px;
+  }
+
+  .admin-main {
+    padding: 24px 20px;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-nav {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+
+    position: relative;
+
+    padding: 12px 14px;
+  }
+
+  .admin-nav-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .admin-nav a {
+    width: auto;
+  }
+
+  .admin-main {
+    padding: 18px 14px;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Admin image previews ---------- */
