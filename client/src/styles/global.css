@@ -26,6 +26,16 @@ body,
   height: 100%;
 }
 
+/* Sticky footer: the storefront's top-level wrapper (Header + page
+   content + Footer) becomes a full-height flex column so the footer
+   is pushed to the bottom of the viewport on short pages instead of
+   leaving a gap of white space below it. */
+#root > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 body {
   margin: 0;
   background: var(--ivory);
@@ -519,7 +529,7 @@ img {
 
 /* MOBILE */
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .hero-container {
     grid-template-columns: 1fr;
     padding-top: 45px;
@@ -1209,7 +1219,7 @@ img {
   padding: 18px 20px 6px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .chart-grid {
     grid-template-columns: 1fr;
   }
@@ -1356,7 +1366,13 @@ table.data-table tr:last-child td {
   background: var(--ink);
   color: #b8b6b4;
   margin-top: 60px;
+  /* margin-top: auto pairs with the #root > div flex column above to
+     stick this to the bottom of short pages; extra bottom padding
+     respects the iPhone home-indicator / gesture-bar safe area. */
+  margin-top: auto;
   padding: 40px 0 24px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  width: 100%;
 }
 
 .footer-grid {
@@ -1392,7 +1408,7 @@ table.data-table tr:last-child td {
   justify-content: space-between;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .hero .container {
     grid-template-columns: 1fr;
   }
@@ -2371,7 +2387,7 @@ table.data-table tr:hover td {
 
 /* Tablet */
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .hero-new-container {
     grid-template-columns: 1fr;
     padding-top: 50px;
@@ -2966,5 +2982,605 @@ table.data-table tr:hover td {
 @media (max-width: 480px) {
   .product-card .product-thumb {
     height: 160px;
+  }
+}
+
+/* Fix: logo was fixed at 200x500 inside a 120x120 box, which
+   distorted/clipped it — make it always fill its own container. */
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   FULL MOBILE RESPONSIVE PASS
+   Desktop (>1024px) is untouched. Everything below only
+   kicks in on tablet/phone widths and re-flows the layout
+   into a single column, shrinks type, and makes tables /
+   wide content horizontally scrollable instead of overflowing.
+   ========================================================= */
+
+/* ---------- Tablet (≤1024px) ---------- */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero-container,
+  .hero-new-container {
+    gap: 30px;
+  }
+
+  .cart-layout {
+    grid-template-columns: 1fr 300px;
+    gap: 18px;
+  }
+
+  .admin-shell {
+    grid-template-columns: 190px 1fr;
+  }
+
+  .admin-main {
+    padding: 22px 20px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+/* ---------- Tablet portrait / large phone (≤820px) ---------- */
+@media (max-width: 820px) {
+  /* Row 1: brand only. Row 2: search + login/cart together in one flex line. */
+  .header-row {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 0;
+    padding: 8px 0;
+    gap: 8px 12px;
+    align-items: center;
+  }
+
+  .brand {
+    order: 1;
+    flex: 1 1 100%;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-mark img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+  }
+
+  .brand-tag {
+    font-size: 10px;
+  }
+
+  .search-form {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .header-actions {
+    order: 3;
+    flex: 0 0 auto;
+    gap: 10px;
+    margin-left: 0;
+  }
+
+  .header-actions a,
+  .header-actions button.linklike {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .cart-pill {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  /* Category strip becomes a swipeable row */
+  .category-strip .container {
+    gap: 16px;
+  }
+
+  /* Hero: stack image row below text, hide decorative product cards */
+  .hero-container,
+  .hero-new-container {
+    grid-template-columns: 1fr;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: left;
+  }
+
+  .hero-products,
+  .hero-new-products {
+    display: none;
+  }
+
+  .hero h1,
+  .hero-new-content h1 {
+    font-size: 38px;
+  }
+
+  .hero-bottom,
+  .hero-new-bottom {
+    position: static;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px 20px;
+    background: rgba(70, 75, 113, 0.9);
+    padding: 14px 16px;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  /* Grids get a bit denser on tablets */
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+    gap: 10px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  /* Cart / checkout stacks to one column, summary goes below */
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Admin: collapse the sidebar into a top bar */
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-nav {
+    min-height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .admin-nav-brand {
+    margin-bottom: 0;
+    margin-right: auto;
+  }
+
+  .admin-nav a.admin-visit-site {
+    margin-bottom: 0;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .admin-nav-links {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    order: 3;
+  }
+
+  .admin-nav-links a {
+    margin-bottom: 0;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .admin-nav-footer {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .admin-main {
+    padding: 18px 14px;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 16px;
+  }
+}
+
+/* ---------- Phones (≤640px) ---------- */
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 14px;
+  }
+
+  /* Utility bar shrinks and wraps if needed */
+  .utility-bar .container {
+    height: auto;
+    min-height: 34px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .utility-bar .fulfillment-toggle button {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  .search-form input {
+    padding: 8px 10px;
+    font-size: 12.5px;
+  }
+
+  .search-form button {
+    padding: 0 12px;
+    font-size: 12.5px;
+  }
+
+  .header-actions {
+    flex-wrap: nowrap;
+  }
+
+  .header-actions a,
+  .header-actions button.linklike {
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .cart-pill {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .cart-count {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+
+  .hero h1,
+  .hero-new-content h1 {
+    font-size: 30px;
+    line-height: 1.08;
+  }
+
+  .hero p,
+  .hero-new-content p {
+    font-size: 14px;
+  }
+
+  .hero-shop-btn,
+  .hero-new-button {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+
+  .hero-buttons,
+  .hero-new-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .hero-bottom,
+  .hero-new-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin: 28px 0 14px;
+  }
+
+  .section-title h2 {
+    font-size: 20px;
+  }
+
+  /* Two small tiles per row on phones */
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-tile {
+    padding: 14px 8px;
+  }
+
+  .category-tile .icon {
+    font-size: 26px;
+  }
+
+  /* Two products per row, compact card size */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .product-card {
+    padding: 8px;
+    gap: 5px;
+    border-radius: 6px;
+  }
+
+  .product-thumb {
+    height: 100px;
+    font-size: 26px;
+    border-radius: 6px;
+  }
+
+  .product-name {
+    font-size: 12px;
+    min-height: 30px;
+    line-height: 1.25;
+  }
+
+  .product-unit {
+    font-size: 10.5px;
+  }
+
+  .price-tag {
+    gap: 5px;
+  }
+
+  .price-tag .now {
+    font-size: 13.5px;
+  }
+
+  .price-tag .was {
+    font-size: 10.5px;
+  }
+
+  .add-btn {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .stock-flag {
+    font-size: 8.5px;
+    padding: 2px 6px;
+    top: 6px;
+    right: 6px;
+  }
+
+  /* Cart line drops to a two-row layout so it never overflows */
+  .cart-line {
+    grid-template-columns: 48px 1fr auto;
+    grid-template-areas:
+      "thumb name name"
+      "thumb qty price";
+    row-gap: 6px;
+  }
+
+  .cart-line .thumb {
+    grid-area: thumb;
+    width: 48px;
+    height: 48px;
+  }
+
+  .cart-line > *:nth-child(2) {
+    grid-area: name;
+  }
+
+  .qty-control {
+    grid-area: qty;
+  }
+
+  .fulfillment-picker {
+    flex-direction: column;
+  }
+
+  /* Login / Register / any narrow auth-style page: keep the card
+     comfortably clear of the screen edges instead of touching them. */
+  .container.page {
+    padding: 0 18px;
+  }
+
+  .page .card,
+  .card {
+    padding: 20px 18px;
+    border-radius: 10px;
+  }
+
+  /* Wide tables scroll horizontally instead of squeezing */
+  table.data-table,
+  .admin-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-card .num,
+  .stat-card .stat-value {
+    font-size: 20px;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-toolbar input,
+  .admin-toolbar select {
+    width: 100%;
+  }
+
+  .modal,
+  .modal-box {
+    padding: 16px;
+    max-height: 88vh;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    text-align: left;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+  }
+
+  .delivery-banner-inner {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 0;
+    text-align: center;
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    gap: 8px;
+  }
+}
+
+/* ---------- Small phones (≤400px) ---------- */
+@media (max-width: 400px) {
+  .hero h1,
+  .hero-new-content h1 {
+    font-size: 26px;
+  }
+
+  .category-grid,
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .product-thumb {
+    height: 90px;
+    font-size: 22px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
+  .header-actions a span,
+  .header-actions button.linklike span {
+    display: none;
+  }
+}
+
+/* =========================================================
+   IPAD / TABLET TUNING (768px–1024px)
+   Covers iPad portrait (768) and landscape (1024), plus
+   Android tablets in that range. This sits between the
+   phone rules above and desktop, giving tablets their own
+   multi-column layout instead of jumping straight to the
+   2-column phone grid.
+   ========================================================= */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 14px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 16px;
+  }
+
+  .product-thumb {
+    height: 165px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .payment-method-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+/* iPad landscape / larger tablets (901–1024): keep the two-column
+   cart and admin sidebar layouts that desktop uses — only touch
+   spacing needs adjusting, not the structure. */
+@media (min-width: 821px) and (max-width: 1024px) {
+  .hero-products,
+  .hero-new-products {
+    display: grid;
+  }
+
+  .hero-product,
+  .hero-new-card {
+    min-height: 120px;
+    padding: 14px;
+  }
+
+  .hero-product-large,
+  .hero-new-card-big {
+    min-height: 160px;
+  }
+
+  .admin-nav {
+    padding: 20px 12px;
+  }
+
+  .admin-main {
+    padding: 24px 22px;
+  }
+}
+
+/* iPad portrait / mid tablets (641–820): admin nav and cart layout
+   already stack via the 820px rules above (better for touch use in
+   portrait), but give them tablet-appropriate spacing instead of
+   the tighter phone spacing. */
+@media (min-width: 641px) and (max-width: 820px) {
+  .admin-nav-links a {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .cart-line {
+    grid-template-columns: 56px 1fr auto auto;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr 1fr;
   }
 }
