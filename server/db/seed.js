@@ -210,6 +210,10 @@ function run() {
   txn();
   console.log("Seed complete.");
   console.log("Admin login -> email: admin@khalidsuperstore.pk / password: Admin@12345");
+  // Force a clean, immediate exit. Newer Node versions can crash with an
+  // assertion error during their normal cleanup hooks when native modules
+  // like better-sqlite3 are involved — exiting explicitly avoids that.
+  process.exit(0);
 }
 
 run();
