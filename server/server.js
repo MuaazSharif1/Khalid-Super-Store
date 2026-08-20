@@ -59,16 +59,18 @@ app.use("/api/settings", settingsRoutes);
 
 app.use((req, res) => res.status(404).json({ error: "Not found" }));
 
+app.use((req, res) => res.status(404).json({ error: "Not found" }));
+
 app.use((err, req, res, next) => {
   console.error(err);
+
   if (err.message === "Not allowed by CORS") {
     return res.status(403).json({ error: "Not allowed by CORS" });
   }
+
   res.status(500).json({ error: "Something went wrong on the server" });
 });
 
-const PORT = process.env.PORT || 4000;
-
 app.listen(PORT, () => {
-  console.log(`Khalid Super Store API running on http://localhost:${PORT}`);
+  console.log(`Khalid Super Store API running on port ${PORT}`);
 });
