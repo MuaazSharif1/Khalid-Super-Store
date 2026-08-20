@@ -163,7 +163,7 @@ export default function Home() {
         </div>
 
         <div className="promo-banner">
-          <img src="/atta-banner.jpg" alt="Khalid Chakki Atta — 100% Whole Wheat Flour" />
+          <img src="/public/atta-banner.jpg" alt="Khalid Chakki Atta — 100% Whole Wheat Flour" />
         </div>
 
         <div className="section-title">
