@@ -48,9 +48,7 @@ export default function Login() {
         <p style={{ marginTop: 16, fontSize: 13 }}>
           New here? <Link to="/register" style={{ fontWeight: 700, color: "var(--brass)" }}>Create an account</Link>
         </p>
-        <p style={{ marginTop: 8, fontSize: 12, color: "var(--ink-soft)" }}>
-          Admin demo login: admin@khalidsuperstore.pk / Admin@12345
-        </p>
+  
       </div>
     </div>
   );
