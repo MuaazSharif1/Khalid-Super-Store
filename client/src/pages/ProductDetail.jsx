@@ -22,7 +22,7 @@ export default function ProductDetail() {
       <p style={{ fontSize: 13, marginBottom: 18 }}>
         <Link to={`/category/${product.category_slug}`}>{product.category_name}</Link> / {product.name}
       </p>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
+      <div className="product-detail-grid">
         <div className="card product-detail-image">
           {product.image ? (
             <img src={resolveImageUrl(product.image)} alt={product.name} />
