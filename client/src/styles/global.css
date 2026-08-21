@@ -532,6 +532,7 @@ img {
 
   .hero h1 {
     font-size: 46px;
+    margin-left: 20px;
   }
 
   .hero-bottom {
@@ -552,6 +553,7 @@ img {
 
   .hero h1 {
     font-size: 40px;
+    margin-left: 20px;
   }
 
   .hero p {
