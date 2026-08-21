@@ -532,7 +532,6 @@ img {
 
   .hero h1 {
     font-size: 46px;
-    margin-left: 20px;
   }
 
   .hero-bottom {
@@ -553,7 +552,6 @@ img {
 
   .hero h1 {
     font-size: 40px;
-    margin-left: 20px;
   }
 
   .hero p {
@@ -3185,16 +3183,11 @@ table.data-table tr:hover td {
     bottom: -110px;
   }
 
-  .hero,
-  .hero-new {
-    border-radius: 0 0 22px 22px;
-  }
-
   .hero-container,
   .hero-new-container {
     grid-template-columns: 1fr;
     min-height: 0;
-    padding: 26px 0 28px;
+    padding: 26px 0 28px 20px;
     gap: 0;
   }
 
