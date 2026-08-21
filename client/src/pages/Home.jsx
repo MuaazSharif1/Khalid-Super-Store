@@ -162,6 +162,10 @@ export default function Home() {
           ))}
         </div>
 
+        <div className="section-title promo-banner-title">
+          <h2>Our Product</h2>
+        </div>
+
         <div className="promo-banner">
           <img src="/atta-banner.jpg" alt="Khalid Chakki Atta — 100% Whole Wheat Flour" />
         </div>
