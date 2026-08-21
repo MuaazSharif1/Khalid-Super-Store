@@ -1440,12 +1440,6 @@ table.data-table tr:last-child td {
     padding: 12px 0;
   }
 
-  .search-form {
-    order: 3;
-    max-width: 100%;
-    width: 100%;
-  }
-
   .two-col {
     grid-template-columns: 1fr;
   }
@@ -3103,6 +3097,7 @@ table.data-table tr:hover td {
   .search-form {
     order: 2;
     flex: 1 1 auto;
+    width: auto;
     min-width: 0;
     max-width: none;
   }
@@ -3188,11 +3183,16 @@ table.data-table tr:hover td {
     bottom: -110px;
   }
 
+  .hero,
+  .hero-new {
+    border-radius: 0 0 22px 22px;
+  }
+
   .hero-container,
   .hero-new-container {
     grid-template-columns: 1fr;
     min-height: 0;
-    padding: 30px 0 32px;
+    padding: 26px 0 28px;
     gap: 0;
   }
 
@@ -3201,17 +3201,33 @@ table.data-table tr:hover td {
     display: none;
   }
 
+  /* Eyebrow becomes a small pill badge instead of plain letter-spaced text */
   .hero-eyebrow,
   .hero-new-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 5px 12px 5px 10px;
+    border-radius: 999px;
+    background: rgba(242, 242, 237, 0.14);
+    border: 1px solid rgba(124, 213, 199, 0.4);
+    margin-bottom: 14px;
+  }
+
+  .hero-eyebrow::before,
+  .hero-new-eyebrow::before {
+    content: "🛒";
     font-size: 11px;
-    margin-bottom: 10px;
   }
 
   .hero h1,
   .hero-new-content h1 {
-    font-size: 30px;
-    line-height: 1.08;
-    margin-bottom: 14px;
+    font-size: 28px;
+    line-height: 1.14;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
   }
 
   .hero p,
@@ -3223,27 +3239,61 @@ table.data-table tr:hover td {
 
   .hero-buttons,
   .hero-new-actions {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 14px;
+    margin-bottom: 22px;
   }
 
   .hero-shop-btn,
   .hero-new-button {
-    padding: 11px 22px;
+    padding: 12px 24px;
     font-size: 13.5px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
   }
 
+  .hero-trust,
+  .hero-new-trust {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-trust strong,
+  .hero-new-trust strong {
+    font-size: 12px;
+  }
+
+  .hero-trust span,
+  .hero-new-trust span {
+    display: none;
+  }
+
+  /* Bottom feature strip becomes a tidy 2x2 grid of glass pill chips
+     instead of a stacked plain-text list. */
   .hero-bottom,
   .hero-new-bottom {
     position: static;
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
-    background: rgba(70, 75, 113, 0.92);
+    background: none;
+    padding: 0;
+    margin-top: 4px;
+  }
+
+  .hero-bottom span,
+  .hero-new-bottom span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(242, 242, 237, 0.12);
+    border: 1px solid rgba(242, 242, 237, 0.18);
     border-radius: 10px;
-    padding: 14px 16px;
-    margin-top: 18px;
+    padding: 9px 10px;
+    font-size: 10.5px;
+    font-weight: 700;
   }
 
   /* ---------------- Section headings ---------------- */
